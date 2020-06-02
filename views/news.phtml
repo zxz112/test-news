@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Новости</title>
+    <link href="\css\normalize.css" rel="stylesheet" />
+    <link href="\css\style.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+    <main>
+        <div class="container">
+            <section class="news">
+                <h1>Новости</h1>
+                <ul class="news-list">
+                    <?php foreach($news as $newsItem):?>
+                    <li class="news-item">
+                        <date><?= date("d.m.Y",$newsItem['idate'])?></date>
+                        <a href="/view?id=<?=$newsItem['id']?>"><?= $newsItem['title']?></a>
+                        <p>
+                            <?= $newsItem['announce']?>
+                        </p>
+                    </li>
+                    <?php endforeach?>
+            </section>
+            <div class="paging">
+                <h3>Страницы:</h3>
+                <div class="page-links">
+                    <?php for ($i = 1; $i <= $pages; $i++):?>
+                        <?php if ($_GET['page'] == $i || (!array_key_exists('page', $_GET) && $i == 1)): ?>
+                            <a class="page-link active" href="/?page=<?=$i?>"><?=$i?></a>
+                        <?php else: ?>
+                            <a class="page-link" href="/?page=<?=$i?>"><?=$i?></a>
+                        <?php endif ?>
+                    <?php endfor?>
+                </div>
+            </div>
+                
+        </div>
+    </main>
+</body>
+</html>

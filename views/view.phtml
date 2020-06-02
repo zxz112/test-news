@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Новости</title>
+    <link href="css\normalize.css" rel="stylesheet" />
+    <link href="css\style.css" rel="stylesheet" />
+    <meta charset='utf-8'>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <section class="news">
+                <h1><?=$news[0]['title']?></h1>
+                <ul class="news-list">
+              
+                    <li class="news-item">
+                        
+                        <p>
+                        <?=$news[0]['content']?>
+                        </p>
+                    </li>
+                </ul>
+            </section>
+            <div class="paging">
+                <div class="page-links">
+                    <a href="/">Все новости >></a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>
