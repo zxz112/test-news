@@ -2,9 +2,9 @@
 
 namespace App;
 
-require_once 'Application.php';
-require_once 'Template.php';
-require_once 'DB.php';
+require_once 'src/Application.php';
+require_once 'src/Template.php';
+require_once 'src/DB.php';
 
 use function App\render;
 
@@ -17,17 +17,18 @@ $app->get('/', function () {
     } elseif (array_key_exists('page', $_GET)) {
         $page = $_GET['page'];
     }
-        $con = DB::connect();
-        $args['news'] = $con->query("SELECT * from news LIMIT $page, $itemOnPage")->fetchAll();
-        $pages = $con->query("SELECT COUNT(*) from news ")->fetchColumn();
-        $args['pages'] = ceil($pages / $itemOnPage);
-        return render('views/news.phtml', $args);
+    $offset = ($page - 1) * $itemOnPage;
+    $db = DB::connect();
+    $args['news'] = $db->query("SELECT * from news ORDER BY idate DESC LIMIT $offset, $itemOnPage")->fetchAll();
+    $pages = $db->query("SELECT COUNT(*) from news ")->fetchColumn();
+    $args['pages'] = ceil($pages / $itemOnPage);
+    return render('views/news.phtml', $args);
 });
 
 $app->get('/view', function () {
-    $con = new \PDO("mysql:host=localhost;dbname=tests", 'root', 'root', array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $id = $_GET['id'];
-    $args['news'] = $con->query("SELECT * from news WHERE id=$id")->fetchAll();
+    $db = DB::connect();
+    $args['news'] = $db->query("SELECT * from news WHERE id=$id")->fetchAll();
     return render('views/view.phtml', $args);
 });
 
