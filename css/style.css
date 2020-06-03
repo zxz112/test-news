@@ -12,6 +12,7 @@ body {
     width: 1010px;
     margin-top: 25px;
 }
+
 .main-page {
    
     background-color: white;
@@ -39,6 +40,7 @@ main .container {
     border-bottom: 1px dotted #832b5b;
     border-top: 1px dotted #832b5b;
 }
+
 .news ul {
     list-style: none;
     margin: 0;
@@ -64,12 +66,6 @@ date {
     background-color: #832b5b;
     color: white;
     padding: 2px 5px;
-}
-
-li {
-    margin: 0;
-    white-space: normal;
-
 }
 
 .paging {
